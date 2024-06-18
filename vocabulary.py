@@ -17,7 +17,7 @@ class Vectorizer:
         words_with_dot = words_with_dot_list.explode()
         words = words_with_dot.apply(lambda x: re.sub(r'[^\w\s]', '', x))
         self.counts = words.value_counts()
-        words = list(self.counts[self.counts > 2].index)
+        words = sorted(list(self.counts[self.counts >= 1].index))
         self.vocabulary = [Vectorizer.pad, Vectorizer.unk,
                            Vectorizer.sos, Vectorizer.eos, *words]
 
